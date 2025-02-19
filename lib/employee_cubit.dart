@@ -25,7 +25,9 @@ class EmployeeCubit extends Cubit<EmployeeState> {
   }
 
   void addEmployee(Employee employee) async {
-    await employeeBox.add(employee);
+
+    final int newId = (employeeBox.keys.isNotEmpty ? employeeBox.keys.last as int : 0) + 1;
+    employeeBox.put(newId, Employee(id: newId, name: employee.name, role: employee.role,start: employee.start,end: employee.end));
     loadEmployees(); // Refresh state
   }
 
@@ -38,7 +40,7 @@ class EmployeeCubit extends Cubit<EmployeeState> {
   }
 
   void deleteEmployee(int index) async {
-    await employeeBox.deleteAt(index);
+    await employeeBox.delete(index);
     loadEmployees();
   }
 }

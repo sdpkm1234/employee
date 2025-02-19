@@ -199,7 +199,7 @@ class _EmployeeDialogState extends State<EmployeeDialog> {
   void _saveEmployee() {
     if (_formKey.currentState!.validate()) {
       final newEmployee = Employee(
-        id: widget.employee?.id, // Hive automatically manages IDs
+        id: widget.employee?.id ?? 0, // Use existing ID or assign 0 (will be auto-updated)
         name: _nameController.text,
         role: _selectedRole.toString(),
         start: _startdateController.text,
